@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'checkstyle'
+    id 'pmd'
 }
 
 group 'org.example'
@@ -13,6 +15,21 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+}
+
+checkstyle {
+    toolVersion = '8.45.1'
+    showViolations = true
+    configFile = file("config/checkstyle/checkstyle.xml")
+}
+
+pmd {
+    //rulesSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"
+    ruleSetFiles = files("config/pmd/ruleset.xml")
+    toolVersion = '6.15.0'
+    ignoreFailures = true
+    consoleOutput = true
 }
 
 test {
