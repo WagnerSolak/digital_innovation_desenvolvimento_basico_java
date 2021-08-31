@@ -31,12 +31,6 @@ Os códigos deste repositório foram construídos durante o **Bootcamp Capgemini
 - Maven
 
 
-```bash
-# clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
-
-```
-
 ### Status
 
 - [ ] Em Andamento
