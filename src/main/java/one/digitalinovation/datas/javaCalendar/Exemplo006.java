@@ -9,6 +9,7 @@ public class Exemplo006 {
         //Calendar instância de getInstance
         Calendar agora = Calendar.getInstance();
         System.out.println("Data corrente : "+ agora.getTime());
+        agora.add(Calendar.MONTH, -1);
 
         //adicionando informação a data
         agora.add(Calendar.DATE, -15);

@@ -1,0 +1,162 @@
+Exceptions
+
+Exceções são todos os erros que ocorrem durante o processamento de um método que podem ser esperados
+ou não esperados. Como o termo já diz, "Exceptions" são exceções. Falhas que não devem ocorrer
+rotineiramente no fluxo de um sistema.
+
+• package lava.lang:
+Como está encadeado o objeto?
+
+                                Throwable
+              Exception-------------||--------------Error
+                 |    |                                |
+                 |    |                                |
+ InterruptedException RuntimeException ...            ThreadDeath ...
+                           | |
+                           | |
+         ArithmeticException NullPointerException ...
+
+Para quais métodos utilizar?
+Para todos os métodos, pois o bloco que contenha o try catch, ele se torna "tratável", e assim
+evitando um erro na tela do usuário de uma forma deselagante.
+
+Exemplos:
+• ArrayIndexOutofBoundsException: é feita uma tentativa de acessar um elemento depois do final do array.
+• ClassCastException: ocorre uma tentativa de fazer uma coerção em um obj que não têm relacionamento
+• NullPointerException: quando uma referência null é utilizada onde um obj é esperado.
+• AtithmeticException: ocorre a partir de problemas na aritmética
+• InputMismatchException ocorre quando um método Scanner nextInt recebe uma string que não represente
+um inteiro válido.
+------------------------------------------------------------------------------------------
+Bloco try contém o código que pode lançar throw um excecao.
+• Consiste na palavra-chave try seguida por um bloco de codigo entre chaves.
+• Se ocorrer uma excecão em algum ponto, o restante do condigo contido no bloco try não será executado.
+• Podem ocorrer por meio: ódigo em um bloco try, chamadas de outros métodos ou a partir da JVM.
+
+Bloco catch contém o tipo do parâmetro de excecao corespondente exatamente ao tipo de excecao lançado ou é
+uma superclasse dele.
+• Captura, recebe e trata a excecao.
+• Excecao não capturada: uma excecao que ocorre para a qual não há nenhum bloco catch correspondente.
+
+A classe Exception e suas subclasses representam situações excepcionais que podem ocorrer em um programa Java e que
+podem ser capturadas pelo aplicativo.
+• A classe Error e suas subclasses representam situações anormais que poderiam acontecer na JVM – normalmente
+não é possível que um programa se recupere de Errors.
+
+-----------------------------------------------------------------------------------------------
+Excecoes esperadas e não esperadas:
+
+• Exceções verificadas (Checked Exceptions)
+- São exceções esperadas, cujo fluxo ou método de um sistema foi preparado para receber. Um bom exemplo é uma
+exceção de negócio, onde se deseja onformar um erro caso a exceção esparada ocorra.
+
+- A excecoes que são herdadas da classe Exception, mas não de RunTimeException.
+- O compilador impoẽm um requisito do tipo 'capturar ou declarar'.
+- O compilador verifica cada chamada de método e declaração de método para determinar se o método lança (throws) exceções
+ verificadas. Se lançar, o compilador assegura que a exceção verificada é capturada ou declarada em uma cláusula throws.
+ Se não capturada nem declarada, ocorre um erro de compilador.
+
+Exemplo de checked exception
+    try{
+        PreparedStatement smtp = con.prepareStament(query);
+        // ...
+        } catch (SQLException e){
+        throw new AcessoDadosException("Problema na criação do Stament", e);
+
+    }
+
+• Exceções não verificadas (Unchecked Exceptions)
+- Exceções não esperadas para o fluxo ou método de um sistema, um exemplo NullPointerException quando se tenta
+acessar uma referência vazia, ou recuperar uma instância que não existe, dentre outros motivos.
+- Herdam da classe RunTimeException ou da classe Errror.
+- O compilador não verifica o código para ver se a exceção foi capturada ou declarada.
+- Se a exceção não verificada ocorrer e não tiver sido capturada, o programa terminará ou executará com
+resultados inesperados.
+- Em geral, podem ser evitadas com uma codificação adequada.
+
+Exemplo de unchecked exception
+Cenário: placa não populada, como null
+    try{
+        CarroVo carro = new CarroVo();
+        carro.getPlaca();
+
+        } catch (IntegrationException e){
+        throw new BusinessException("Erro na criação do objeto", e);
+
+    }
+
+• Bloco try catch
+- O bloco try catch sempre é utilizado quando no processo que será executado dentro de um método é esperado
+um erro, então cria-se um bloco "protegido" onde qualquer erro que ocorra dentro do trecho "try" é direcionado
+para o trecho "catch" e sofrerá o devido tratamento do erro.
+
+• Bloco finaly
+- Pode ou não ser usado, sempre será executado independente se ocorrer erro ou não dentro do fluxo onde existe o
+try/catch. Normalmente o finally é usado para liberar recursos ou para dar continuidade em um fluxo que deve
+ocorrer independente de erro.
+- Consiste na palavra-chave finally seguida por um bloco do código entre chaves.
+- Opcional em instrução try.
+- Se presente, é colocado depois do último bloco catch.
+- Executa se uma exceção for lançada no bloco try correspondente ou qualquer um dos blocos catch correspondentes
+- Não executará se a aplicação encerrar prematuramente em  um bloco try via método System.exit
+- Em geral contém código de liberação de recursos.
+
+Exemplo de bloco finally:
+    try{
+    PrepararedStament smtp = con.prepareStatement(query);
+    //...
+    } catch (SQLException e){
+    throw new AcessoDadosException("Problema na criação do Statement", e)
+
+    }finally {
+    smtp.close();
+    }
+
+Throw e Throws
+
+Throws: é a assinatura do método que será retornado caso ocorra erro para o método que fez a chamada, dentro de
+um fluxo encadeado. (vai esprar uma determinada exceção, lanca para a "camada de cima")
+
+Throw: é usado para lançar a exceção desejada, juntamente com a mensagem de erro, apra o método que fez a
+chamada. (excecao de integridade com bco, regra de negocio, separa a plicação em camada e as exceção tb em
+camadas para ter coerencia da aplicação)
+
+Exemplo de throw e throws
+
+public String recuperarIdUsuario(String query) throws AcessoADadosException{
+    try{
+    PreparedStatement smtp = con.prepareStament(query);
+    // ...
+    }catch (SQLException e) {
+    throw new AcessoADadosException("Problema na criação do statement", e);
+
+    }finally {
+    smtp.close();
+    }
+}
+    throw new => criar uma referência de memória para a classe de exceção.
+    throws => tenho uma exceção esperada específica e dentro dela temos a msg para verificação de log por exemplo.
+
+
+Estrutura:
+
+try
+{
+ instruções
+ instruções de aquisição de recurso
+} // fim de try
+catch ( UmTipoDeExceção exceção1 )
+{
+instruções de tratamento de exceções
+} // fim de catch
+
+catch ( OutroTipoDeExceção exceção2 )
+{
+ instruções de tratamento de exceções
+} // fim de catch
+finally
+{
+ instruções
+ instruções de liberação de recursos
+} // fim de finally
+
