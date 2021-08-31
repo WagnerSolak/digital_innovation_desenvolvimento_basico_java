@@ -39,8 +39,8 @@ git clone https://github.com/devsuperior/sds1-wmazoni
 
 ### Status
 
-- [x] Em Andamento
-- [ ] Concluído
+- [ ] Em Andamento
+- [X] Concluído
 
 
 # Autor
