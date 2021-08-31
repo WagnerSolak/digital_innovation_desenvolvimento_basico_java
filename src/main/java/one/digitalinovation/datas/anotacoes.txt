@@ -1,0 +1,40 @@
+java.util.Date
+Quando a gente instancia um objto da classe Date, o construtor vao alocar um objeto da classe Date e o inicializará com milisegundo mais rpóximo do período
+da sua execução.
+
+Date(long date)
+Diferente do construtor anterior, esse construtor espera que vc passe os milisegundos com base padrão de tempo()epoch) que usa como referência 1 de janeiro
+de 1970 00:00:00
+
+"O epoch timestamp é um padrão largamente aceito para representar uma data coomo um inteiro 32-bits a partir do início do Unix Epoch".
+Vamos testar com base no System.currentTimeMilis(). Esse método estático vai nos retornar milisegundo mais proximo de sua execução com base no Sistema
+Operacional.
+System.currentTimeMilis() <=> vai retornar um long com os milisegundos mais proximo que ele foi executado!
+
+Métodos úteis
+
+Alguns métodos da classe Date são muito úteis e serão usados com frequência durante a manipulação de datas.
+
+
+Classe Istant
+Surgiu na JDK 1.8
+Imutável e Thread safe;
+Modela um ponto instantâneo de uma linha do tempo;
+Indicado para gravar marcações temporais em eventos da sua aplicação (evento disparado)
+
+
+java.util.Calendar
+Já na JDK 1.1 foi observada a necessidade de facilitar alguns recursos que a class Date oferecia.
+Sendo assim, a classe Calendar foi criada.
+Com isso uma série de métodos e construtores da classe Date foi depreciada. Por exemplo o construtor Date(int year, int month, int date).
+
+
+Calendar é uma classe abstrata que provê métodos para converter data entre um instante específico.
+O Calendar possui alguns campos específicos para manipulação de MONTH, YEAR, HOUR, etc.
+Imprimindo datas e horas
+Convertendo o resultado de um obj Calendar.
+
+java.text.DateFormat
+Nesse ponto em que estamos existem, basicamente, duas classes para formatação de datas. O DateFormat e o SimpleDateFormat.
+Ambos oferecem maneiras de formatar e parsear a saída das datas.
+
